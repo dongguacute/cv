@@ -1,4 +1,6 @@
 import meAvatar from '@/assets/avatar/me.jpg'
+import orgGudupaoSpark from '@/assets/orgs/gudupaospark.png'
+import orgOpenBioCard from '@/assets/orgs/openbiocard.png'
 
 /** 侧栏文案与链接，按需在下方修改。 */
 export interface Profile {
@@ -23,6 +25,34 @@ export interface Profile {
   x: { label: string, href: string }
   profileUrl: string | null
 }
+
+/** 侧栏 Organizations，与 github.com/dongguacute 公开资料一致；头像见 src/assets/orgs。 */
+export interface ProfileOrganization {
+  login: string
+  logoSrc: string
+  url: string
+}
+
+export const profileOrganizations: ProfileOrganization[] = [
+  {
+    login: 'GudupaoSpark',
+    logoSrc: orgGudupaoSpark,
+    url: 'https://github.com/GudupaoSpark',
+  },
+  {
+    login: 'OpenBioCard',
+    logoSrc: orgOpenBioCard,
+    url: 'https://github.com/OpenBioCard',
+  },
+]
+
+/** 右侧 README 区展示的摘抄（对应仓库首屏大意）。 */
+export const profileReadmeExcerpt = {
+  filePath: 'dongguacute/README.md',
+  heading: '🎀 ૮ ˶ᵔ ᵕ ᵔ˶ ა Welcome to my World! 🍃',
+  tagline: '15-year-old Student Dev | C++ & Python Lover | Dreaming in Code',
+  quote: 'Collecting stardust and writing scripts. Balabababa~ 🎵',
+} as const
 
 export const profile: Profile = {
   name: 'Cherry 🍒',

@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  /* 暖纸色 + 樱桃点缀，易读、不刺眼 */
+  --color-cv-bg: #e6e0d9;
+  --color-cv-shell: #faf6f1;
+  --color-cv-panel: #ffffff;
+  --color-cv-border: #dcd3ca;
+  --color-cv-border-soft: #ebe4dc;
+  --color-cv-ink: #241e1a;
+  --color-cv-muted: #6a625c;
+  --color-cv-accent: #b84a5c;
+  --color-cv-accent-hover: #963d4d;
+  --color-cv-accent-soft: #f5e8eb;
+}
