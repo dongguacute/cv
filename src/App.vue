@@ -292,10 +292,10 @@ const identityLine = computed(() => {
 
         <section
           class="border-t border-cv-border px-6 pb-6"
-          aria-label="能力"
+          aria-label="工具"
         >
           <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
-            能力（部分为少量使用，web框架或编程语言为长期大量使用）
+            工具（部分为少量使用，web框架或编程语言为长期大量使用）
           </h2>
           <a
             :href="profileSkillIconsBanner.href"

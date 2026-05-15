@@ -33,7 +33,7 @@ describe('App', () => {
 
   it('renders skill icons banner', () => {
     const wrapper = mount(App)
-    expect(wrapper.text()).toContain('能力')
+    expect(wrapper.text()).toContain('工具')
     const banner = wrapper.find('[data-testid="skill-icons-banner"]')
     expect(banner.exists()).toBe(true)
     expect(banner.attributes('href')).toBe(profileSkillIconsBanner.href)
