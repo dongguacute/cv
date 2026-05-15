@@ -75,6 +75,12 @@ export const profileProjects: ProfileProject[] = [
     description: '一个使用手机屏幕根据算法分析环境光和化妆品色号，来显示有色光来模拟妆容在自然光下的状态。',
     url: 'https://github.com/dongguacute/Hilo',
   },
+  {
+    slug: 'CV',
+    name: 'CV',
+    description: '本项目',
+    url: 'https://github.com/dongguacute/cv',
+  },
 ]
 
 /** 右侧「能力」横幅（skillicons），由 https://skillicons.dev 生成；修改 i= 以增删图标。 */
