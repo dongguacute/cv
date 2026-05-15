@@ -66,7 +66,7 @@ export const profileProjects: ProfileProject[] = [
   {
     slug: 'openbiocard',
     name: 'OpenBioCard',
-    description: '参与维护的开源项目之一（组织见上方 Organizations）。',
+    description: '企业级电子名片系统，可配合NFC卡片一起使用',
     url: 'https://github.com/OpenBioCard',
   },
   {
