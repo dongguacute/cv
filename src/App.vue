@@ -81,8 +81,7 @@ const localTimeText = computed(() => {
 
 const identityLine = computed(() => {
   const u = profile.username
-  const p = profile.pronouns
-  return p ? `${u} · ${p}` : u
+  return u
 })
 </script>
 

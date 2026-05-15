@@ -7,7 +7,6 @@ import { SKILL_ICON_SLUGS } from '@/lib/skillIcons'
 export interface Profile {
   name: string
   username: string
-  pronouns: string | null
   avatarSrc: string
   /** 头像右下角状态圆贴内的符号，如 emoji */
   statusEmoji: string
@@ -102,7 +101,6 @@ export const profileReadmeExcerpt = {
 export const profile: Profile = {
   name: '冬瓜有点困💤',
   username: 'dongguacute',
-  pronouns: 'she/her',
   avatarSrc: meAvatar,
   statusEmoji: '🥰',
   bioLine1: '我是 冬瓜｜📮 联系我',
