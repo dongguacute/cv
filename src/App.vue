@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { profile, profileOrganizations, profileReadmeExcerpt } from '@/lib/org'
+import {
+  profile,
+  profileOrganizations,
+  profileProjects,
+  profileReadmeExcerpt,
+  profileSkillIconsBanner,
+} from '@/lib/org'
 
 const now = ref(Date.now())
 let timer: ReturnType<typeof setInterval> | undefined
@@ -246,16 +252,77 @@ const identityLine = computed(() => {
             「 {{ profileReadmeExcerpt.quote }} 」
           </p>
           <p class="mt-6 text-xs text-cv-muted">
-            下方可继续补充技能、Pinned 仓库等与
+            完整仓库与动态见
             <a
               href="https://github.com/dongguacute"
               class="font-medium text-cv-accent no-underline hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >GitHub 主页</a>
-            一致的内容。
+            。
           </p>
         </article>
+
+        <section
+          v-if="profileProjects.length"
+          class="border-t border-cv-border px-6 pb-6"
+          aria-label="项目列表"
+        >
+          <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
+            项目
+          </h2>
+          <ul class="flex flex-col gap-4 text-sm">
+            <li
+              v-for="project in profileProjects"
+              :key="project.slug"
+            >
+              <a
+                :href="project.url"
+                class="font-semibold text-cv-accent no-underline underline-offset-2 transition hover:text-cv-accent-hover hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                :data-testid="`project-${project.slug}`"
+              >{{ project.name }}</a>
+              <p class="mt-1 text-sm leading-snug text-cv-muted">
+                {{ project.description }}
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section
+          class="border-t border-cv-border px-6 pb-6"
+          aria-label="能力"
+        >
+          <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
+            能力（部分为少量使用，web框架或编程语言为长期大量使用）
+          </h2>
+          <a
+            :href="profileSkillIconsBanner.href"
+            class="block overflow-hidden rounded-lg ring-1 ring-cv-border-soft transition hover:ring-cv-accent/35"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="skill-icons-banner"
+          >
+            <img
+              :src="profileSkillIconsBanner.src"
+              alt="Skill icons：常用工具与技术栈图标墙"
+              class="h-auto w-full max-w-full bg-cv-shell/40"
+              loading="lazy"
+              decoding="async"
+            >
+          </a>
+          <p class="mt-2 text-xs text-cv-muted">
+            图标由
+            <a
+              href="https://skillicons.dev"
+              class="font-medium text-cv-accent no-underline hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >skillicons.dev</a>
+            生成。
+          </p>
+        </section>
       </main>
     </div>
   </div>
