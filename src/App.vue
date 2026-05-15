@@ -8,24 +8,65 @@ import {
   profileReadmeExcerpt,
   profileSkillIconsBanner,
 } from '@/lib/org'
+import { skillIconUrl } from '@/lib/skillIcons'
 import { getThemeMode, setThemeMode } from '@/lib/theme'
+
+function readPrefersDark(): boolean {
+  if (typeof window.matchMedia !== 'function')
+    return false
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
 
 const now = ref(Date.now())
 let timer: ReturnType<typeof setInterval> | undefined
+let prefersMq: MediaQueryList | undefined
+let onPrefersSchemeChange: (() => void) | undefined
 
 const themeMode = ref<ThemeMode>(getThemeMode())
-watch(themeMode, mode => setThemeMode(mode))
+const prefersDark = ref(readPrefersDark())
+
+watch(themeMode, (mode) => {
+  setThemeMode(mode)
+  if (mode === 'system')
+    prefersDark.value = readPrefersDark()
+})
 
 onMounted(() => {
+  prefersDark.value = readPrefersDark()
   timer = setInterval(() => {
     now.value = Date.now()
   }, 30_000)
+  if (typeof window.matchMedia === 'function') {
+    prefersMq = window.matchMedia('(prefers-color-scheme: dark)')
+    onPrefersSchemeChange = () => {
+      if (themeMode.value === 'system')
+        prefersDark.value = prefersMq!.matches
+    }
+    prefersMq.addEventListener('change', onPrefersSchemeChange)
+  }
 })
 
 onUnmounted(() => {
   if (timer !== undefined)
     clearInterval(timer)
+  if (prefersMq !== undefined && onPrefersSchemeChange !== undefined)
+    prefersMq.removeEventListener('change', onPrefersSchemeChange)
 })
+
+const skillIconsTheme = computed<'light' | 'dark'>(() => {
+  if (themeMode.value === 'dark')
+    return 'dark'
+  if (themeMode.value === 'light')
+    return 'light'
+  return prefersDark.value ? 'dark' : 'light'
+})
+
+const skillIconItems = computed(() =>
+  profileSkillIconsBanner.iconSlugs.map(slug => ({
+    slug,
+    src: skillIconUrl(slug, skillIconsTheme.value),
+  })),
+)
 
 const localTimeText = computed(() => {
   const d = new Date(now.value)
@@ -47,7 +88,7 @@ const identityLine = computed(() => {
 
 <template>
   <div
-    class="flex min-h-screen flex-col gap-3 bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep px-4 py-6 text-cv-ink antialiased sm:px-6 sm:py-10"
+    class="flex min-h-dvh flex-col gap-3 bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep pt-[max(1.5rem,env(safe-area-inset-top))] pr-[max(1rem,env(safe-area-inset-right))] pb-[max(1.5rem,env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] text-cv-ink antialiased sm:pt-[max(2.5rem,env(safe-area-inset-top))] sm:pr-[max(1.5rem,env(safe-area-inset-right))] sm:pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pl-[max(1.5rem,env(safe-area-inset-left))]"
   >
     <div
       class="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-end gap-3"
@@ -152,10 +193,10 @@ const identityLine = computed(() => {
       </div>
     </div>
     <div
-      class="mx-auto box-border flex max-w-[1280px] flex-col gap-8 rounded-2xl border border-cv-border bg-cv-shell/95 p-5 shadow-[var(--cv-shadow-card)] ring-1 ring-white/60 backdrop-blur-sm dark:ring-white/10 md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
+      class="mx-auto box-border flex max-w-[1280px] flex-col gap-6 rounded-2xl border border-cv-border bg-cv-shell/95 p-4 shadow-[var(--cv-shadow-card)] ring-1 ring-white/60 backdrop-blur-sm sm:gap-8 sm:p-5 dark:ring-white/10 md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
     >
       <aside
-        class="w-full max-w-[296px] shrink-0 rounded-xl bg-cv-panel/70 p-4 shadow-sm ring-1 ring-cv-border-soft md:bg-transparent md:p-0 md:shadow-none md:ring-0"
+        class="w-full max-w-[296px] min-w-0 shrink-0 rounded-xl bg-cv-panel/70 p-3 shadow-sm ring-1 ring-cv-border-soft sm:p-4 md:bg-transparent md:p-0 md:shadow-none md:ring-0"
         aria-label="个人资料"
       >
         <div class="flex flex-col gap-4 md:sticky md:top-8">
@@ -170,7 +211,7 @@ const identityLine = computed(() => {
                 :alt="`${profile.name} 的头像`"
                 width="296"
                 height="296"
-                class="size-[296px] max-w-full rounded-full border-2 border-cv-border-soft object-cover shadow-md shadow-cv-ink/10 ring-4 ring-white dark:ring-cv-panel"
+                class="aspect-square w-full max-w-[296px] rounded-full border-2 border-cv-border-soft object-cover shadow-md shadow-cv-ink/10 ring-4 ring-white dark:ring-cv-panel"
               >
               <span
                 class="absolute bottom-[6px] right-[6px] flex size-[26px] items-center justify-center rounded-full border border-cv-border bg-cv-panel text-[14px] leading-none shadow-sm"
@@ -332,9 +373,9 @@ const identityLine = computed(() => {
       </aside>
 
       <main
-        class="min-h-[200px] flex-1 overflow-hidden rounded-xl border border-cv-border bg-cv-panel shadow-[var(--cv-shadow-main)] ring-1 ring-cv-border-soft/80"
+        class="min-h-[200px] min-w-0 flex-1 overflow-hidden rounded-xl border border-cv-border bg-cv-panel shadow-[var(--cv-shadow-main)] ring-1 ring-cv-border-soft/80"
       >
-        <div class="flex items-center gap-2 border-b border-cv-border bg-cv-shell/80 px-4 py-2.5 text-sm text-cv-muted">
+        <div class="flex min-w-0 items-center gap-2 border-b border-cv-border bg-cv-shell/80 px-3 py-2.5 text-sm text-cv-muted sm:px-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -346,9 +387,9 @@ const identityLine = computed(() => {
           >
             <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 7.324a.75.75 0 0 0 .04.901c1.233 1.358 3.443 1.358 4.677-.04l.831-.915a.75.75 0 0 1 .82-.211l1.148.483a.232.232 0 0 1 .092.312l-1.82 3.645a.75.75 0 0 1-1.34 0l-1.82-3.645a.232.232 0 0 1 .092-.312l1.148-.483a.75.75 0 0 1 .82.211l.83.915c1.086 1.183 2.991 1.183 4.077 0a.763.763 0 0 0 .04-.901l-2.188-4.745a.75.75 0 0 0-.69-.43H7.941a.75.75 0 0 0-.69.43Z" />
           </svg>
-          <span class="font-mono text-xs text-cv-ink/80">{{ profileReadmeExcerpt.filePath }}</span>
+          <span class="min-w-0 flex-1 truncate font-mono text-xs text-cv-ink/80">{{ profileReadmeExcerpt.filePath }}</span>
         </div>
-        <article class="p-6 text-cv-ink">
+        <article class="p-4 text-cv-ink sm:p-6">
           <h1 class="mb-3 border-0 text-xl font-bold text-cv-ink">
             {{ profileReadmeExcerpt.heading }}
           </h1>
@@ -372,7 +413,7 @@ const identityLine = computed(() => {
 
         <section
           v-if="profileProjects.length"
-          class="border-t border-cv-border px-6 pb-6"
+          class="border-t border-cv-border px-4 pb-6 sm:px-6"
           aria-label="项目列表"
         >
           <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
@@ -398,7 +439,7 @@ const identityLine = computed(() => {
         </section>
 
         <section
-          class="border-t border-cv-border px-6 pb-6"
+          class="border-t border-cv-border px-4 pb-6 sm:px-6"
           aria-label="工具"
         >
           <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
@@ -410,14 +451,23 @@ const identityLine = computed(() => {
             target="_blank"
             rel="noopener noreferrer"
             data-testid="skill-icons-banner"
+            aria-label="Skill icons：常用工具与技术栈图标墙"
           >
-            <img
-              :src="profileSkillIconsBanner.src"
-              alt="Skill icons：常用工具与技术栈图标墙"
-              class="h-auto w-full max-w-full bg-cv-shell/40"
-              loading="lazy"
-              decoding="async"
+            <div
+              class="grid grid-cols-5 gap-1 bg-cv-shell/40 p-1.5 sm:grid-cols-8 sm:gap-1.5 md:grid-cols-10 lg:grid-cols-[repeat(15,minmax(0,1fr))]"
             >
+              <img
+                v-for="item in skillIconItems"
+                :key="item.slug"
+                :src="item.src"
+                :alt="`${item.slug} 图标`"
+                class="h-auto w-full rounded-[0.35rem]"
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+              >
+            </div>
           </a>
           <p class="mt-2 text-xs text-cv-muted">
             图标由

@@ -1,6 +1,7 @@
 import meAvatar from '@/assets/avatar/me.jpg'
 import orgGudupaoSpark from '@/assets/orgs/gudupaospark.png'
 import orgOpenBioCard from '@/assets/orgs/openbiocard.png'
+import { SKILL_ICON_SLUGS } from '@/lib/skillIcons'
 
 /** 侧栏文案与链接，按需在下方修改。 */
 export interface Profile {
@@ -83,10 +84,10 @@ export const profileProjects: ProfileProject[] = [
   },
 ]
 
-/** 右侧「能力」横幅（skillicons），由 https://skillicons.dev 生成；修改 i= 以增删图标。 */
+/** 右侧「能力」图标墙；资源在 src/assets/skill-icons/{light,dark}/，名单见 SKILL_ICON_SLUGS */
 export const profileSkillIconsBanner = {
-  src: 'https://skillicons.dev/icons?i=apple,blender,bootstrap,cpp,discord,fastapi,gmail,kali,npm,obsidian,qt,pnpm,postgres,gcp,opencv,java,pytorch,raspberrypi,stackoverflow,unity,unreal,visualstudio,js,html,css,ts,vue,vite,py,go,flutter,vscode,figma,arduino,astro,au,cloudflare,docker,electron,git,github,githubactions,linux,md,mongodb,mysql,nextjs,nodejs,nginx,nuxt,ps,pr,sqlite,tailwind,vercel,wordpress,workers,ubuntu,debian,bash&theme=light',
-  /** 点击横幅跳转（可改为个人主页等） */
+  iconSlugs: SKILL_ICON_SLUGS,
+  /** 点击图标墙跳转（可改为个人主页等） */
   href: 'https://skillicons.dev',
 } as const
 

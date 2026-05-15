@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import App from '../App.vue'
 import { profile, profileOrganizations, profileProjects, profileSkillIconsBanner } from '../lib/org'
+import { SKILL_ICON_SLUGS, skillIconUrl } from '../lib/skillIcons'
 
 describe('app', () => {
   beforeEach(() => {
@@ -47,8 +48,9 @@ describe('app', () => {
     const banner = wrapper.find('[data-testid="skill-icons-banner"]')
     expect(banner.exists()).toBe(true)
     expect(banner.attributes('href')).toBe(profileSkillIconsBanner.href)
-    const img = banner.find('img')
-    expect(img.attributes('src')).toBe(profileSkillIconsBanner.src)
+    const imgs = banner.findAll('img')
+    expect(imgs.length).toBe(SKILL_ICON_SLUGS.length)
+    expect(imgs[0]?.attributes('src')).toBe(skillIconUrl(SKILL_ICON_SLUGS[0], 'light'))
   })
 
   it('theme control persists and toggles document class', async () => {

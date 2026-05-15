@@ -43,6 +43,24 @@
   --cv-shadow-btn-hover: 0 4px 14px -4px rgb(221 115 135 / 0.45);
 }
 
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: clip;
+    overflow-wrap: break-word;
+  }
+
+  #app {
+    min-height: 100dvh;
+  }
+}
+
 @theme {
   --color-cv-bg: var(--cv-bg);
   --color-cv-bg-mid: var(--cv-bg-mid);
