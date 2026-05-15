@@ -42,7 +42,7 @@ const identityLine = computed(() => {
 
 <template>
   <div
-    class="min-h-screen bg-linear-to-br from-cv-bg via-[#ebe6e0] to-[#ddd7cf] px-4 py-6 text-cv-ink antialiased sm:px-6 sm:py-10"
+    class="min-h-screen bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep px-4 py-6 text-cv-ink antialiased sm:px-6 sm:py-10"
   >
     <div
       class="mx-auto box-border flex max-w-[1280px] flex-col gap-8 rounded-2xl border border-cv-border bg-cv-shell/95 p-5 shadow-[0_8px_30px_-8px_rgba(36,30,26,0.12),0_2px_8px_-4px_rgba(36,30,26,0.06)] ring-1 ring-white/60 backdrop-blur-sm md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"

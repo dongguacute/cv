@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* 暖纸色 + 樱桃点缀，易读、不刺眼 */
-  --color-cv-bg: #e6e0d9;
-  --color-cv-shell: #faf6f1;
+  /* 暖纸色 + 樱桃点缀：底色偏亮、略带粉杏调，避免旧纸张发灰 */
+  --color-cv-bg: #faf6f2;
+  --color-cv-bg-mid: #f1e8e1;
+  --color-cv-bg-deep: #e5dad1;
+  --color-cv-shell: #fcf9f6;
   --color-cv-panel: #ffffff;
   --color-cv-border: #dcd3ca;
   --color-cv-border-soft: #ebe4dc;
