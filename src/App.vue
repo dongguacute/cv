@@ -87,10 +87,10 @@ const identityLine = computed(() => {
 
 <template>
   <div
-    class="flex min-h-dvh flex-col gap-3 bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep pt-[max(1.5rem,env(safe-area-inset-top))] pr-[max(1rem,env(safe-area-inset-right))] pb-[max(1.5rem,env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] text-cv-ink antialiased sm:pt-[max(2.5rem,env(safe-area-inset-top))] sm:pr-[max(1.5rem,env(safe-area-inset-right))] sm:pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pl-[max(1.5rem,env(safe-area-inset-left))]"
+    class="flex min-h-dvh flex-col gap-2.5 bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep pt-[max(1.25rem,env(safe-area-inset-top))] pr-[max(0.875rem,env(safe-area-inset-right))] pb-[max(1.25rem,env(safe-area-inset-bottom))] pl-[max(0.875rem,env(safe-area-inset-left))] text-cv-ink antialiased sm:gap-3 sm:pt-[max(2.5rem,env(safe-area-inset-top))] sm:pr-[max(1.5rem,env(safe-area-inset-right))] sm:pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pl-[max(1.5rem,env(safe-area-inset-left))]"
   >
     <div
-      class="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-end gap-3"
+      class="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-center gap-2 sm:justify-end sm:gap-3"
       role="radiogroup"
       aria-label="主题外观"
       data-testid="theme-mode"
@@ -106,7 +106,7 @@ const identityLine = computed(() => {
           type="button"
           role="radio"
           :aria-checked="themeMode === 'light'"
-          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          class="touch-manipulation flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:min-h-0 sm:min-w-0 sm:justify-start sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
           :class="themeMode === 'light'
             ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02]'
             : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
@@ -135,7 +135,7 @@ const identityLine = computed(() => {
           type="button"
           role="radio"
           :aria-checked="themeMode === 'dark'"
-          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          class="touch-manipulation flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:min-h-0 sm:min-w-0 sm:justify-start sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
           :class="themeMode === 'dark'
             ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02] dark:from-[#dd7387] dark:to-[#b84a5c]'
             : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
@@ -164,7 +164,7 @@ const identityLine = computed(() => {
           type="button"
           role="radio"
           :aria-checked="themeMode === 'system'"
-          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          class="touch-manipulation flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:min-h-0 sm:min-w-0 sm:justify-start sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
           :class="themeMode === 'system'
             ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02] dark:from-[#dd7387] dark:to-[#b84a5c]'
             : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
@@ -192,10 +192,10 @@ const identityLine = computed(() => {
       </div>
     </div>
     <div
-      class="mx-auto box-border flex max-w-[1280px] flex-col gap-6 rounded-2xl border border-cv-border bg-cv-shell/95 p-4 shadow-[var(--cv-shadow-card)] ring-1 ring-white/60 backdrop-blur-sm sm:gap-8 sm:p-5 dark:ring-white/10 md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
+      class="mx-auto box-border flex max-w-[1280px] flex-col gap-5 rounded-2xl border border-cv-border bg-cv-shell/95 p-3 shadow-[var(--cv-shadow-card)] ring-1 ring-white/60 backdrop-blur-sm sm:gap-8 sm:p-5 dark:ring-white/10 md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
     >
       <aside
-        class="w-full max-w-[296px] min-w-0 shrink-0 rounded-xl bg-cv-panel/70 p-3 shadow-sm ring-1 ring-cv-border-soft sm:p-4 md:bg-transparent md:p-0 md:shadow-none md:ring-0"
+        class="mx-auto w-full max-w-[min(296px,calc(100vw-2.5rem))] min-w-0 shrink-0 rounded-xl bg-cv-panel/70 p-3 shadow-sm ring-1 ring-cv-border-soft sm:p-4 md:mx-0 md:max-w-[296px] md:bg-transparent md:p-0 md:shadow-none md:ring-0"
         aria-label="个人资料"
       >
         <div class="flex flex-col gap-4 md:sticky md:top-8">
@@ -203,17 +203,20 @@ const identityLine = computed(() => {
             <component
               :is="profile.profileUrl ? 'a' : 'div'"
               v-bind="profile.profileUrl ? { href: profile.profileUrl, target: '_blank', rel: 'noopener noreferrer' } : {}"
-              class="relative inline-block shrink-0"
+              class="relative block aspect-square w-full max-w-[296px] shrink-0 rounded-full border-2 border-cv-border-soft bg-cv-shell shadow-md shadow-cv-ink/10 ring-4 ring-white dark:bg-cv-panel/40 dark:ring-cv-panel"
             >
-              <img
-                :src="profile.avatarSrc"
-                :alt="`${profile.name} 的头像`"
-                width="296"
-                height="296"
-                class="aspect-square w-full max-w-[296px] rounded-full border-2 border-cv-border-soft object-cover shadow-md shadow-cv-ink/10 ring-4 ring-white dark:ring-cv-panel"
-              >
+              <div class="h-full w-full overflow-hidden rounded-full">
+                <img
+                  :src="profile.avatarSrc"
+                  :alt="`${profile.name} 的头像`"
+                  width="296"
+                  height="296"
+                  decoding="async"
+                  class="h-full w-full object-cover"
+                >
+              </div>
               <span
-                class="absolute bottom-[6px] right-[6px] flex size-[26px] items-center justify-center rounded-full border border-cv-border bg-cv-panel text-[14px] leading-none shadow-sm"
+                class="pointer-events-none absolute bottom-[6px] right-[6px] flex size-[26px] items-center justify-center rounded-full border border-cv-border bg-cv-panel text-[14px] leading-none shadow-sm"
                 aria-hidden="true"
               >{{ profile.statusEmoji }}</span>
             </component>
@@ -225,12 +228,12 @@ const identityLine = computed(() => {
             >
               {{ profile.name }}
             </h1>
-            <p class="text-lg text-cv-muted">
+            <p class="wrap-break-word text-lg text-cv-muted">
               {{ identityLine }}
             </p>
           </div>
 
-          <div class="space-y-1 text-center text-sm leading-snug text-cv-ink/95 md:text-left">
+          <div class="space-y-1 text-center text-sm leading-snug text-cv-ink/95 wrap-break-word md:text-left">
             <p>{{ profile.bioLine1 }}</p>
             <p>
               <a
@@ -241,7 +244,7 @@ const identityLine = computed(() => {
           </div>
 
           <a
-            class="block w-full rounded-lg bg-cv-accent px-3 py-2.5 text-center text-sm font-semibold text-white shadow-[var(--cv-shadow-btn)] no-underline transition hover:bg-cv-accent-hover hover:shadow-[var(--cv-shadow-btn-hover)] active:translate-y-px"
+            class="touch-manipulation block w-full rounded-lg bg-cv-accent px-3 py-3 text-center text-sm font-semibold text-white shadow-[var(--cv-shadow-btn)] no-underline transition hover:bg-cv-accent-hover hover:shadow-[var(--cv-shadow-btn-hover)] active:translate-y-px sm:py-2.5"
             :href="`mailto:${profile.contactEmail}`"
           >{{ profile.contactButtonLabel }}</a>
 
@@ -257,7 +260,7 @@ const identityLine = computed(() => {
               </span>
               <a
                 :href="profile.organization.url"
-                class="font-semibold text-cv-ink hover:text-cv-accent hover:underline"
+                class="min-w-0 wrap-break-word font-semibold text-cv-ink hover:text-cv-accent hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >{{ profile.organization.label }}</a>
@@ -289,7 +292,7 @@ const identityLine = computed(() => {
                 </svg>
               </span>
               <a
-                class="font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
+                class="min-w-0 wrap-break-word font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
                 :href="profile.website.href"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -302,7 +305,7 @@ const identityLine = computed(() => {
                 </svg>
               </span>
               <a
-                class="font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
+                class="min-w-0 wrap-break-word font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
                 :href="profile.github.href"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -315,7 +318,7 @@ const identityLine = computed(() => {
                 </svg>
               </span>
               <a
-                class="font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
+                class="min-w-0 wrap-break-word font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
                 :href="profile.youtube.href"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -328,7 +331,7 @@ const identityLine = computed(() => {
                 </svg>
               </span>
               <a
-                class="font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
+                class="min-w-0 wrap-break-word font-medium text-cv-accent underline decoration-cv-accent/25 underline-offset-2 hover:text-cv-accent-hover hover:decoration-cv-accent-hover"
                 :href="profile.x.href"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -350,7 +353,7 @@ const identityLine = computed(() => {
               >
                 <a
                   :href="org.url"
-                  class="inline-flex items-center gap-1.5 rounded-md p-0.5 text-sm text-cv-ink no-underline outline-none ring-cv-accent/40 transition hover:bg-cv-accent-soft/50 hover:text-cv-accent focus-visible:ring-2"
+                  class="inline-flex max-w-full min-w-0 items-center gap-1.5 rounded-md p-0.5 text-sm text-cv-ink no-underline outline-none ring-cv-accent/40 transition hover:bg-cv-accent-soft/50 hover:text-cv-accent focus-visible:ring-2"
                   target="_blank"
                   rel="noopener noreferrer"
                   :title="`@${org.login}`"
@@ -361,9 +364,9 @@ const identityLine = computed(() => {
                     alt=""
                     width="32"
                     height="32"
-                    class="size-8 rounded-md border border-cv-border bg-cv-panel object-cover shadow-sm"
+                    class="size-8 shrink-0 rounded-md border border-cv-border bg-cv-panel object-cover shadow-sm"
                   >
-                  <span class="font-semibold">@{{ org.login }}</span>
+                  <span class="min-w-0 wrap-break-word font-semibold">@{{ org.login }}</span>
                 </a>
               </template>
             </div>
@@ -386,10 +389,10 @@ const identityLine = computed(() => {
           >
             <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 7.324a.75.75 0 0 0 .04.901c1.233 1.358 3.443 1.358 4.677-.04l.831-.915a.75.75 0 0 1 .82-.211l1.148.483a.232.232 0 0 1 .092.312l-1.82 3.645a.75.75 0 0 1-1.34 0l-1.82-3.645a.232.232 0 0 1 .092-.312l1.148-.483a.75.75 0 0 1 .82.211l.83.915c1.086 1.183 2.991 1.183 4.077 0a.763.763 0 0 0 .04-.901l-2.188-4.745a.75.75 0 0 0-.69-.43H7.941a.75.75 0 0 0-.69.43Z" />
           </svg>
-          <span class="min-w-0 flex-1 truncate font-mono text-xs text-cv-ink/80">{{ profileReadmeExcerpt.filePath }}</span>
+          <span class="min-w-0 flex-1 break-all font-mono text-xs text-cv-ink/80 sm:truncate sm:break-normal">{{ profileReadmeExcerpt.filePath }}</span>
         </div>
-        <article class="p-4 text-cv-ink sm:p-6">
-          <h1 class="mb-3 border-0 text-xl font-bold text-cv-ink">
+        <article class="p-3.5 text-cv-ink sm:p-6">
+          <h1 class="mb-3 border-0 text-lg font-bold wrap-break-word text-cv-ink sm:text-xl">
             {{ profileReadmeExcerpt.heading }}
           </h1>
           <p class="text-sm font-semibold text-cv-ink">
@@ -412,7 +415,7 @@ const identityLine = computed(() => {
 
         <section
           v-if="profileProjects.length"
-          class="border-t border-cv-border px-4 pb-6 sm:px-6"
+          class="border-t border-cv-border px-3.5 pb-6 sm:px-6"
           aria-label="项目列表"
         >
           <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
@@ -425,7 +428,7 @@ const identityLine = computed(() => {
             >
               <a
                 :href="project.url"
-                class="font-semibold text-cv-accent no-underline underline-offset-2 transition hover:text-cv-accent-hover hover:underline"
+                class="wrap-break-word font-semibold text-cv-accent no-underline underline-offset-2 transition hover:text-cv-accent-hover hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
                 :data-testid="`project-${project.slug}`"
@@ -438,10 +441,10 @@ const identityLine = computed(() => {
         </section>
 
         <section
-          class="border-t border-cv-border px-4 pb-6 sm:px-6"
+          class="border-t border-cv-border px-3.5 pb-6 sm:px-6"
           aria-label="工具"
         >
-          <h2 class="mb-4 pt-2 text-sm font-semibold text-cv-ink">
+          <h2 class="mb-4 pt-2 text-xs font-semibold leading-snug text-cv-ink sm:text-sm">
             工具（部分为少量使用，web框架或编程语言为长期大量使用）
           </h2>
           <a
@@ -453,7 +456,7 @@ const identityLine = computed(() => {
             aria-label="Skill icons：常用工具与技术栈图标墙"
           >
             <div
-              class="grid grid-cols-5 gap-1 bg-cv-shell/40 p-1.5 sm:grid-cols-8 sm:gap-1.5 md:grid-cols-10 lg:grid-cols-[repeat(15,minmax(0,1fr))]"
+              class="grid grid-cols-4 gap-1.5 bg-cv-shell/40 p-2 sm:grid-cols-7 sm:gap-1.5 sm:p-1.5 md:grid-cols-10 md:p-1.5 lg:grid-cols-[repeat(15,minmax(0,1fr))]"
             >
               <img
                 v-for="item in skillIconItems"
