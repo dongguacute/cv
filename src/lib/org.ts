@@ -23,6 +23,7 @@ export interface Profile {
   website: { label: string, href: string }
   youtube: { label: string, href: string }
   x: { label: string, href: string }
+  github: { label: string, href: string }
   profileUrl: string | null
 }
 
@@ -55,12 +56,12 @@ export const profileReadmeExcerpt = {
 } as const
 
 export const profile: Profile = {
-  name: 'Cherry 🍒',
+  name: '冬瓜有点困💤',
   username: 'dongguacute',
-  pronouns: '她/her',
+  pronouns: 'she/her',
   avatarSrc: meAvatar,
   statusEmoji: '🥰',
-  bioLine1: '我是 Cherry🍒｜📮 联系我',
+  bioLine1: '我是 冬瓜｜📮 联系我',
   bioLine2: 'me@dgct.cc',
   contactEmail: 'me@dgct.cc',
   contactButtonLabel: '发邮件联系',
@@ -82,6 +83,10 @@ export const profile: Profile = {
   x: {
     label: '@CherryCuteGS',
     href: 'https://x.com/CherryCuteGS',
+  },
+  github: {
+    label: '@dongguacute',
+    href: 'https://github.com/dongguacute',
   },
   profileUrl: null,
 }
