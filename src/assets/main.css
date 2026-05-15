@@ -1,17 +1,58 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --cv-bg: #faf6f2;
+  --cv-bg-mid: #f1e8e1;
+  --cv-bg-deep: #e5dad1;
+  --cv-shell: #fcf9f6;
+  --cv-panel: #ffffff;
+  --cv-border: #dcd3ca;
+  --cv-border-soft: #ebe4dc;
+  --cv-ink: #241e1a;
+  --cv-muted: #6a625c;
+  --cv-accent: #b84a5c;
+  --cv-accent-hover: #963d4d;
+  --cv-accent-soft: #f5e8eb;
+  --cv-shadow-card: 0 8px 30px -8px rgb(36 30 26 / 0.12), 0 2px 8px -4px rgb(36 30 26 / 0.06);
+  --cv-shadow-main: 0 2px 12px -4px rgb(36 30 26 / 0.08);
+  --cv-shadow-btn: 0 2px 8px -2px rgb(184 74 92 / 0.45);
+  --cv-shadow-btn-hover: 0 4px 14px -4px rgb(150 61 77 / 0.5);
+}
+
+.dark {
+  color-scheme: dark;
+  --cv-bg: #171412;
+  --cv-bg-mid: #1f1b18;
+  --cv-bg-deep: #28231f;
+  --cv-shell: #1e1a17;
+  --cv-panel: #252019;
+  --cv-border: #3f3832;
+  --cv-border-soft: #342e28;
+  --cv-ink: #f3ece5;
+  --cv-muted: #a69e95;
+  --cv-accent: #dd7387;
+  --cv-accent-hover: #e891a1;
+  --cv-accent-soft: rgb(221 115 135 / 0.18);
+  --cv-shadow-card: 0 8px 30px -8px rgb(0 0 0 / 0.5), 0 2px 8px -4px rgb(0 0 0 / 0.35);
+  --cv-shadow-main: 0 2px 12px -4px rgb(0 0 0 / 0.45);
+  --cv-shadow-btn: 0 2px 8px -2px rgb(221 115 135 / 0.35);
+  --cv-shadow-btn-hover: 0 4px 14px -4px rgb(221 115 135 / 0.45);
+}
 
 @theme {
-  /* 暖纸色 + 樱桃点缀：底色偏亮、略带粉杏调，避免旧纸张发灰 */
-  --color-cv-bg: #faf6f2;
-  --color-cv-bg-mid: #f1e8e1;
-  --color-cv-bg-deep: #e5dad1;
-  --color-cv-shell: #fcf9f6;
-  --color-cv-panel: #ffffff;
-  --color-cv-border: #dcd3ca;
-  --color-cv-border-soft: #ebe4dc;
-  --color-cv-ink: #241e1a;
-  --color-cv-muted: #6a625c;
-  --color-cv-accent: #b84a5c;
-  --color-cv-accent-hover: #963d4d;
-  --color-cv-accent-soft: #f5e8eb;
+  --color-cv-bg: var(--cv-bg);
+  --color-cv-bg-mid: var(--cv-bg-mid);
+  --color-cv-bg-deep: var(--cv-bg-deep);
+  --color-cv-shell: var(--cv-shell);
+  --color-cv-panel: var(--cv-panel);
+  --color-cv-border: var(--cv-border);
+  --color-cv-border-soft: var(--cv-border-soft);
+  --color-cv-ink: var(--cv-ink);
+  --color-cv-muted: var(--cv-muted);
+  --color-cv-accent: var(--cv-accent);
+  --color-cv-accent-hover: var(--cv-accent-hover);
+  --color-cv-accent-soft: var(--cv-accent-soft);
 }

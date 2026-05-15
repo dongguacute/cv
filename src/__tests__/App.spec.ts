@@ -1,10 +1,20 @@
-import { describe, it, expect } from 'vitest'
-
 import { mount } from '@vue/test-utils'
+
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import App from '../App.vue'
 import { profile, profileOrganizations, profileProjects, profileSkillIconsBanner } from '../lib/org'
 
-describe('App', () => {
+describe('app', () => {
+  beforeEach(() => {
+    localStorage.removeItem('cv-theme')
+    document.documentElement.classList.remove('dark')
+  })
+
+  afterEach(() => {
+    localStorage.removeItem('cv-theme')
+    document.documentElement.classList.remove('dark')
+  })
+
   it('renders profile sidebar', () => {
     const wrapper = mount(App)
     expect(wrapper.text()).toContain(profile.name)
@@ -39,5 +49,16 @@ describe('App', () => {
     expect(banner.attributes('href')).toBe(profileSkillIconsBanner.href)
     const img = banner.find('img')
     expect(img.attributes('src')).toBe(profileSkillIconsBanner.src)
+  })
+
+  it('theme control persists and toggles document class', async () => {
+    const wrapper = mount(App)
+    expect(wrapper.find('[data-testid="theme-mode"]').exists()).toBe(true)
+    await wrapper.find('[data-testid="theme-option-dark"]').trigger('click')
+    expect(document.documentElement.classList.contains('dark')).toBe(true)
+    expect(localStorage.getItem('cv-theme')).toBe('dark')
+    await wrapper.find('[data-testid="theme-option-light"]').trigger('click')
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
+    expect(localStorage.getItem('cv-theme')).toBe('light')
   })
 })

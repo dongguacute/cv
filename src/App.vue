@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import type { ThemeMode } from '@/lib/theme'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import {
   profile,
   profileOrganizations,
@@ -7,9 +8,13 @@ import {
   profileReadmeExcerpt,
   profileSkillIconsBanner,
 } from '@/lib/org'
+import { getThemeMode, setThemeMode } from '@/lib/theme'
 
 const now = ref(Date.now())
 let timer: ReturnType<typeof setInterval> | undefined
+
+const themeMode = ref<ThemeMode>(getThemeMode())
+watch(themeMode, mode => setThemeMode(mode))
 
 onMounted(() => {
   timer = setInterval(() => {
@@ -42,10 +47,112 @@ const identityLine = computed(() => {
 
 <template>
   <div
-    class="min-h-screen bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep px-4 py-6 text-cv-ink antialiased sm:px-6 sm:py-10"
+    class="flex min-h-screen flex-col gap-3 bg-linear-to-br from-cv-bg via-cv-bg-mid to-cv-bg-deep px-4 py-6 text-cv-ink antialiased sm:px-6 sm:py-10"
   >
     <div
-      class="mx-auto box-border flex max-w-[1280px] flex-col gap-8 rounded-2xl border border-cv-border bg-cv-shell/95 p-5 shadow-[0_8px_30px_-8px_rgba(36,30,26,0.12),0_2px_8px_-4px_rgba(36,30,26,0.06)] ring-1 ring-white/60 backdrop-blur-sm md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
+      class="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-end gap-3"
+      role="radiogroup"
+      aria-label="主题外观"
+      data-testid="theme-mode"
+    >
+      <span
+        class="font-['Dancing_Script',cursive] text-lg text-cv-muted leading-none select-none"
+        aria-hidden="true"
+      >Theme</span>
+      <div
+        class="inline-flex items-center gap-0.5 rounded-full border border-cv-border bg-linear-to-b from-cv-panel to-cv-shell p-1 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.55),0_2px_10px_-4px_rgb(36_30_26_/_0.18)] ring-1 ring-cv-border-soft/60 dark:from-cv-panel dark:to-cv-panel dark:shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06),0_4px_16px_-6px_rgb(0_0_0_/_0.55)] dark:ring-cv-border-soft/40"
+      >
+        <button
+          type="button"
+          role="radio"
+          :aria-checked="themeMode === 'light'"
+          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          :class="themeMode === 'light'
+            ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02]'
+            : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
+          title="浅色"
+          data-testid="theme-option-light"
+          @click="themeMode = 'light'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="size-4 shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v2.25m6.364 1.636-1.591 1.591M21 12h-2.25m-1.636 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+            />
+          </svg>
+          <span class="hidden sm:inline">浅色</span>
+        </button>
+        <button
+          type="button"
+          role="radio"
+          :aria-checked="themeMode === 'dark'"
+          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          :class="themeMode === 'dark'
+            ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02] dark:from-[#dd7387] dark:to-[#b84a5c]'
+            : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
+          title="深色"
+          data-testid="theme-option-dark"
+          @click="themeMode = 'dark'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="size-4 shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.754A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+            />
+          </svg>
+          <span class="hidden sm:inline">深色</span>
+        </button>
+        <button
+          type="button"
+          role="radio"
+          :aria-checked="themeMode === 'system'"
+          class="flex items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold transition-all duration-200 outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-cv-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cv-panel dark:focus-visible:ring-offset-cv-panel"
+          :class="themeMode === 'system'
+            ? 'bg-linear-to-br from-cv-accent to-[#963d4d] text-white shadow-[var(--cv-shadow-btn)] scale-[1.02] dark:from-[#dd7387] dark:to-[#b84a5c]'
+            : 'text-cv-muted hover:bg-cv-shell/90 hover:text-cv-ink dark:hover:bg-cv-bg-deep/80'"
+          title="跟随系统"
+          data-testid="theme-option-system"
+          @click="themeMode = 'system'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="size-4 shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25M3 5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25v7.5A2.25 2.25 0 0118.75 15H5.25A2.25 2.25 0 013 12.75v-7.5z"
+            />
+          </svg>
+          <span class="hidden sm:inline">系统</span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="mx-auto box-border flex max-w-[1280px] flex-col gap-8 rounded-2xl border border-cv-border bg-cv-shell/95 p-5 shadow-[var(--cv-shadow-card)] ring-1 ring-white/60 backdrop-blur-sm dark:ring-white/10 md:flex-row md:items-start md:gap-12 md:p-8 lg:p-10"
     >
       <aside
         class="w-full max-w-[296px] shrink-0 rounded-xl bg-cv-panel/70 p-4 shadow-sm ring-1 ring-cv-border-soft md:bg-transparent md:p-0 md:shadow-none md:ring-0"
@@ -63,7 +170,7 @@ const identityLine = computed(() => {
                 :alt="`${profile.name} 的头像`"
                 width="296"
                 height="296"
-                class="size-[296px] max-w-full rounded-full border-2 border-cv-border-soft object-cover shadow-md shadow-cv-ink/10 ring-4 ring-white"
+                class="size-[296px] max-w-full rounded-full border-2 border-cv-border-soft object-cover shadow-md shadow-cv-ink/10 ring-4 ring-white dark:ring-cv-panel"
               >
               <span
                 class="absolute bottom-[6px] right-[6px] flex size-[26px] items-center justify-center rounded-full border border-cv-border bg-cv-panel text-[14px] leading-none shadow-sm"
@@ -94,7 +201,7 @@ const identityLine = computed(() => {
           </div>
 
           <a
-            class="block w-full rounded-lg bg-cv-accent px-3 py-2.5 text-center text-sm font-semibold text-white shadow-[0_2px_8px_-2px_rgba(184,74,92,0.45)] no-underline transition hover:bg-cv-accent-hover hover:shadow-[0_4px_14px_-4px_rgba(150,61,77,0.5)] active:translate-y-px"
+            class="block w-full rounded-lg bg-cv-accent px-3 py-2.5 text-center text-sm font-semibold text-white shadow-[var(--cv-shadow-btn)] no-underline transition hover:bg-cv-accent-hover hover:shadow-[var(--cv-shadow-btn-hover)] active:translate-y-px"
             :href="`mailto:${profile.contactEmail}`"
           >{{ profile.contactButtonLabel }}</a>
 
@@ -225,7 +332,7 @@ const identityLine = computed(() => {
       </aside>
 
       <main
-        class="min-h-[200px] flex-1 overflow-hidden rounded-xl border border-cv-border bg-cv-panel shadow-[0_2px_12px_-4px_rgba(36,30,26,0.08)] ring-1 ring-cv-border-soft/80"
+        class="min-h-[200px] flex-1 overflow-hidden rounded-xl border border-cv-border bg-cv-panel shadow-[var(--cv-shadow-main)] ring-1 ring-cv-border-soft/80"
       >
         <div class="flex items-center gap-2 border-b border-cv-border bg-cv-shell/80 px-4 py-2.5 text-sm text-cv-muted">
           <svg

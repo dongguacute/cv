@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
-import './assets/main.css'
+import { initTheme } from '@/lib/theme'
 import App from './App.vue'
 import router from './router'
+import './assets/main.css'
+
+initTheme()
 
 const app = createApp(App)
 
